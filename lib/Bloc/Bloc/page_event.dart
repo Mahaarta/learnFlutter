@@ -18,6 +18,6 @@ class GoToLoginPage extends PageEvent {
 }
 
 class GoToMainPage extends PageEvent {
-  @override
+  @override  
   List<Object> get props => [];
 }
