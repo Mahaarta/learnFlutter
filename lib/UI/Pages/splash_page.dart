@@ -11,8 +11,8 @@ class SplashPage extends StatelessWidget {
           child: ElevatedButton(
         child: const Text("Go to login page"),
         onPressed: () {
-            context.read<PageBloc>().add(GoToLoginPage());
-            // BlocProvider.of<PageBloc>(context).add(GoToLoginPage());
+            // context.read<PageBloc>().add(GoToLoginPage());
+            BlocProvider.of<PageBloc>(context).add(GoToLoginPage());
         },
       )),
     );

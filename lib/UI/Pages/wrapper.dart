@@ -20,17 +20,17 @@ class Wrapper extends StatelessWidget {
       if (prevPageEventx is! GoToSplashPage) {
         prevPageEventx = GoToSplashPage();
         context.read<PageBloc>().add(GoToSplashPage());
-        // BlocProvider.of<PageBloc>(context).add(GoToSplashPage());
         BlocProvider.of<PageBloc>(context).add(GoToSplashPage());
+        // BlocProvider.of<PageBloc>(context).add(GoToSplashPage());
       }
     } else {
       if (prevPageEventx is! GoToMainPage) {
         prevPageEventx = GoToMainPage();
-        context.read<PageBloc>().add(GoToMainPage());
+        // context.read<PageBloc>().add(GoToMainPage());
         if (kDebugMode) {
           print("HAHHA");
         }
-       // BlocProvider.of<PageBloc>(context).add(GoToSplashPage());
+       BlocProvider.of<PageBloc>(context).add(GoToSplashPage());
       }
     }
 
