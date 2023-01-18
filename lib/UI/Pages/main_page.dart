@@ -16,11 +16,12 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(title: const Text("Main Page")),
       body: Center(
           child: ElevatedButton(
-        child: const Text("Sign Out"),
         onPressed: () {
           pageBloc.add(GoToLoginPage());
           AuthServices.signOuts();
         },
+        style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+        child: const Text("Sign Out"),
       )),
     );
   }
