@@ -6,8 +6,11 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PageBloc pageBloc = BlocProvider.of<PageBloc>(context);
+    UserBloc userBloc = BlocProvider.of<UserBloc>(context);
 
     auth.User? firebaseUser = Provider.of<auth.User?>(context);
+    
+    print("wrappp");
 
     if (firebaseUser == null) {
       if (prevPageEventx is! GoToSplashPage) {
@@ -16,6 +19,7 @@ class Wrapper extends StatelessWidget {
       }
     } else {
       if (prevPageEventx is! GoToMainPage) {
+        userBloc.add(LoadUser(firebaseUser.uid));
         prevPageEventx = GoToMainPage();
         pageBloc.add(GoToMainPage());
       }
