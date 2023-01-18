@@ -22,9 +22,15 @@ class MyApp extends StatelessWidget {
       value: AuthServices.userStream,
       initialData: null,
       child: MultiBlocProvider(
-          providers: [BlocProvider(create: (_) => PageBloc())],
-          child: const MaterialApp(
-              debugShowCheckedModeBanner: false, home: Wrapper())),
+        providers: [
+          BlocProvider<PageBloc>(create: (context) => PageBloc()),
+          BlocProvider<UserBloc>(create: (contenxt) => UserBloc())
+        ],
+        child: const MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Wrapper(),
+        ),
+      ),
     );
   }
 }
