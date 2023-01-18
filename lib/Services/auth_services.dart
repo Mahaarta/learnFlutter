@@ -28,7 +28,6 @@ class AuthServices {
 
       return SignInSignUpResult(user: user);
     } on FirebaseAuthException catch (error) {
-      print(error.message);
       return SignInSignUpResult(message: error.message);
     }
   }
@@ -37,7 +36,7 @@ class AuthServices {
     try {
       await auth.FirebaseAuth.instance.signOut();
     } catch (error) {
-      print(error.toString());
+      throw UnimplementedError();
     }
   }
 

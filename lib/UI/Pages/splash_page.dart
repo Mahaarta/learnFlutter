@@ -5,14 +5,15 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PageBloc pageBloc = BlocProvider.of<PageBloc>(context);
+
     return Scaffold(
       appBar: AppBar(title: const Text("Splash Page")),
       body: Center(
           child: ElevatedButton(
         child: const Text("Go to login page"),
         onPressed: () {
-            // context.read<PageBloc>().add(GoToLoginPage());
-            BlocProvider.of<PageBloc>(context).add(GoToLoginPage());
+          pageBloc.add(GoToLoginPage());
         },
       )),
     );
