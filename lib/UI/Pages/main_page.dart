@@ -11,7 +11,6 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     PageBloc pageBloc = BlocProvider.of<PageBloc>(context);
-    auth.FirebaseAuth currentUser = auth.FirebaseAuth.instance;
 
     return Scaffold(
       appBar: AppBar(title: const Text("Main Page")),
@@ -24,7 +23,7 @@ class _MainPageState extends State<MainPage> {
                 ? FutureBuilder(
                     future: userState.user,
                     builder: (context, snapshot) => Text(
-                      snapshot.data?.selectedLanguage ?? "noname",
+                      snapshot.data?.name ?? "noname",
                     ),
                   )
                 : SizedBox(
