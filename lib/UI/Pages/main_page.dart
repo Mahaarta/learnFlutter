@@ -10,15 +10,18 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
+    PageBloc pageBloc = BlocProvider.of<PageBloc>(context);
+
     return Scaffold(
       appBar: AppBar(title: const Text("Main Page")),
       body: Center(
           child: ElevatedButton(
-        child: const Text("Sign Out"),
         onPressed: () {
-          print("logout tapped");
+          pageBloc.add(GoToLoginPage());
           AuthServices.signOuts();
         },
+        style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+        child: const Text("Sign Out"),
       )),
     );
   }

@@ -5,37 +5,20 @@ class Wrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    auth.User? firebaseUser = Provider.of<auth.User?>(context);
-    PageState? pageStates;
+    PageBloc pageBloc = BlocProvider.of<PageBloc>(context);
 
-    if (kDebugMode) {
-      print("firebaseUser == $firebaseUser");
-    }
+    auth.User? firebaseUser = Provider.of<auth.User?>(context);
 
     if (firebaseUser == null) {
-      if (kDebugMode) {
-        print("prevPageEventx == $prevPageEventx");
-      }
-
       if (prevPageEventx is! GoToSplashPage) {
         prevPageEventx = GoToSplashPage();
-        context.read<PageBloc>().add(GoToSplashPage());
-        BlocProvider.of<PageBloc>(context).add(GoToSplashPage());
-        // BlocProvider.of<PageBloc>(context).add(GoToSplashPage());
+        pageBloc.add(GoToSplashPage());
       }
     } else {
       if (prevPageEventx is! GoToMainPage) {
         prevPageEventx = GoToMainPage();
-        // context.read<PageBloc>().add(GoToMainPage());
-        if (kDebugMode) {
-          print("HAHHA");
-        }
-       BlocProvider.of<PageBloc>(context).add(GoToSplashPage());
+        pageBloc.add(GoToMainPage());
       }
-    }
-
-    if (kDebugMode) {
-      print("pageStates == $pageStates");
     }
 
     return BlocBuilder<PageBloc, PageState>(
@@ -43,6 +26,6 @@ class Wrapper extends StatelessWidget {
             ? const SplashPage()
             : (pageState is OnLoginPage)
                 ? const SignInPage()
-                : const SplashPage());
+                : const MainPage());
   }
 }
