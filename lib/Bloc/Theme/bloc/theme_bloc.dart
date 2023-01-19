@@ -11,7 +11,6 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   ThemeBloc() : super(ThemeState(ThemeData())) {
     on<ThemeEvent>((event, emit) {
       if (event is ChangeTheme) {
-        print("123 == $event");
         _themeData = ThemeState(event.themeData);
         emit(_themeData);
       }
