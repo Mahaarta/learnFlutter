@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_flushbar/flutter_flushbar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:learn_flutter/Bloc/bloc/blocs.dart';
 import 'package:learn_flutter/Extensions/email_validator.dart';
 import 'package:learn_flutter/Services/services.dart';

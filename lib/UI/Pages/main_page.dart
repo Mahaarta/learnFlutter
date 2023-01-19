@@ -8,6 +8,9 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  int bottomNavbarIndex = 0;
+  PageController? pageController;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +33,8 @@ class _MainPageState extends State<MainPage> {
               child: Container(
                 height: 46,
                 width: 46,
-                margin: const EdgeInsets.only(bottom: 42 + 16), // 16 adalah margin dari safe area
+                margin: const EdgeInsets.only(
+                    bottom: 42 + 16), // 16 adalah margin dari safe area
                 child: FloatingActionButton(
                   elevation: 0,
                   backgroundColor: accentColor2,
@@ -61,6 +65,39 @@ class _MainPageState extends State<MainPage> {
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20),
+              ),
+            ),
+            child: BottomNavigationBar(
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              selectedItemColor: primaryColor,
+              unselectedItemColor: const Color(0xffe5e5e5),
+              currentIndex: bottomNavbarIndex,
+              items: [
+                BottomNavigationBarItem(
+                  label: "New Movies",
+                  icon: Container(
+                    height: 20,
+                    margin: const EdgeInsets.only(bottom: 6),
+                    child: Image.asset((bottomNavbarIndex == 0)
+                        ? "assets/ic_movies.png"
+                        : "assets/ic_movies_gray"),
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "My Tickets",
+                  icon: Container(
+                    height: 20,
+                    margin: const EdgeInsets.only(bottom: 6),
+                    child: Image.asset((bottomNavbarIndex == 1)
+                        ? "assets/ic_tickets.png"
+                        : "assets/ic_tickets_gray.png"),
+                  ),
+                )
+              ],
+              unselectedLabelStyle: GoogleFonts.raleway(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
