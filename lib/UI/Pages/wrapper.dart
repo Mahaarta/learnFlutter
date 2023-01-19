@@ -9,18 +9,16 @@ class Wrapper extends StatelessWidget {
     UserBloc userBloc = BlocProvider.of<UserBloc>(context);
 
     auth.User? firebaseUser = Provider.of<auth.User?>(context);
-    
-    print("wrappp");
 
     if (firebaseUser == null) {
-      if (prevPageEventx is! GoToSplashPage) {
-        prevPageEventx = GoToSplashPage();
+      if (prevPageEvent is! GoToSplashPage) {
+        prevPageEvent = GoToSplashPage();
         pageBloc.add(GoToSplashPage());
       }
     } else {
-      if (prevPageEventx is! GoToMainPage) {
+      if (prevPageEvent is! GoToMainPage) {
         userBloc.add(LoadUser(firebaseUser.uid));
-        prevPageEventx = GoToMainPage();
+        prevPageEvent = GoToMainPage();
         pageBloc.add(GoToMainPage());
       }
     }
