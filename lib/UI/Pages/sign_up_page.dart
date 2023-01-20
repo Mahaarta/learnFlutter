@@ -106,7 +106,14 @@ class _SignUpPageState extends State<SignUpPage> {
                           Align(
                             alignment: FractionalOffset.bottomCenter,
                             child: GestureDetector(
-                              onTap: () {},
+                              onTap: () async {
+                                if (widget.registrationData?.profilePicture == null) {
+                                    //widget.registrationData?.profilePicture = await getImageFromGallery();
+                                    ImagePicker().pickImage(source: ImageSource.gallery);
+                                } else {
+                                    widget.registrationData?.profilePicture = null;
+                                }
+                              },
                               child: Container(
                                 height: 28,
                                 width: 28,
