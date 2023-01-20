@@ -9,7 +9,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int bottomNavbarIndex = 0;
-  PageController? pageController;
+  PageController pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,18 @@ class _MainPageState extends State<MainPage> {
               color: const Color(0xfff6f7f9),
             ),
           ),
-          ListView(),
+          PageView(
+            controller: pageController,
+            onPageChanged: (index) {
+              setState(() {
+                bottomNavbarIndex = index;
+              });
+            },
+            children: const [
+              MoviePage(),
+              Center(child: Text("My Ticket")),
+            ],
+          ),
           createCustomBottomNavigation(),
           Align(
               alignment: Alignment.bottomCenter,
@@ -38,7 +49,10 @@ class _MainPageState extends State<MainPage> {
                 child: FloatingActionButton(
                   elevation: 0,
                   backgroundColor: accentColor2,
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<UserBloc>().add(SignOut());
+                    AuthServices.signOuts();
+                  },
                   child: SizedBox(
                     width: 30,
                     height: 30,
@@ -73,6 +87,12 @@ class _MainPageState extends State<MainPage> {
               selectedItemColor: primaryColor,
               unselectedItemColor: const Color(0xffe5e5e5),
               currentIndex: bottomNavbarIndex,
+              onTap: (index) {
+                setState(() {
+                  bottomNavbarIndex = index;
+                  pageController.jumpToPage(index);
+                });
+              },
               items: [
                 BottomNavigationBarItem(
                   label: "New Movies",
@@ -81,7 +101,7 @@ class _MainPageState extends State<MainPage> {
                     margin: const EdgeInsets.only(bottom: 6),
                     child: Image.asset((bottomNavbarIndex == 0)
                         ? "assets/ic_movies.png"
-                        : "assets/ic_movies_gray"),
+                        : "assets/ic_movies_gray.png"),
                   ),
                 ),
                 BottomNavigationBarItem(
@@ -122,7 +142,5 @@ class BottomNavBarClipper extends CustomClipper<Path> {
   }
 
   @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    throw UnimplementedError();
-  }
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
