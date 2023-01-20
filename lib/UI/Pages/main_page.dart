@@ -34,8 +34,8 @@ class _MainPageState extends State<MainPage> {
               });
             },
             children: const [
-              Center(child: Text("New Movie")),
-              Center(child: Text("My Ticket"))
+              MoviePage(),
+              Center(child: Text("My Ticket")),
             ],
           ),
           createCustomBottomNavigation(),
@@ -49,7 +49,10 @@ class _MainPageState extends State<MainPage> {
                 child: FloatingActionButton(
                   elevation: 0,
                   backgroundColor: accentColor2,
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<UserBloc>().add(SignOut());
+                    AuthServices.signOuts();
+                  },
                   child: SizedBox(
                     width: 30,
                     height: 30,
@@ -86,7 +89,6 @@ class _MainPageState extends State<MainPage> {
               currentIndex: bottomNavbarIndex,
               onTap: (index) {
                 setState(() {
-                  print(index);
                   bottomNavbarIndex = index;
                   pageController.jumpToPage(index);
                 });
