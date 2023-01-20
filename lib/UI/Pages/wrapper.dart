@@ -28,6 +28,8 @@ class Wrapper extends StatelessWidget {
             ? const SplashPage()
             : (pageState is OnLoginPage)
                 ? const SignInPage()
-                : const MainPage());
+                : (pageState is OnSignUpPage)
+                    ? SignUpPage(registrationData: pageState.registrationData)
+                    : const MainPage());
   }
 }
