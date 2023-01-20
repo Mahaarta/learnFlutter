@@ -32,7 +32,38 @@ class _SignUpPageState extends State<SignUpPage> {
       },
       child: MaterialApp(
         home: Scaffold(
-          body: Container(child: Center(child: Text("ad")),),
+          body: Container(
+            color: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: defaultMargin),
+            child: ListView(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(top: 20, bottom: 22),
+                      height: 56,
+                      child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: GestureDetector(
+                              onTap: () {
+                                context.read<PageBloc>().add(GoToSplashPage());
+                              },
+                              child: const Icon(
+                                Icons.arrow_back,
+                                color: Colors.black,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
