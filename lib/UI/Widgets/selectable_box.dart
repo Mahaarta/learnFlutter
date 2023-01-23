@@ -9,8 +9,9 @@ class SelectableBox extends StatelessWidget {
   final Function? onTap;
   final TextStyle? textStyle;
 
-  const SelectableBox(this.text, this.textStyle,
+  const SelectableBox(this.text,
       {super.key,
+      this.textStyle,
       this.isSelected = false,
       this.isEnabled = true,
       this.height = 144,
@@ -21,8 +22,8 @@ class SelectableBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (onTap != null) {
-          onTap;
+        if (onTap?.call() != null) {
+          onTap?.call();
         }
       },
       child: Container(
