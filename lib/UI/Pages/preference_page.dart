@@ -3,19 +3,13 @@ part of 'pages.dart';
 class PreferencePage extends StatefulWidget {
   final RegistrationData registrationData;
 
-  final List<String> genres = [
-    "Horor",
-    "Music",
-    "Action",
-    "Drama",
-    "War",
-    "crime"
-  ];
+  final List<String> genres = ["Horor", "Action", "Drama", "War", "Comedy"];
   final List<String> languages = [
     "Indonesian",
     "English",
     "Japanese",
-    "Korean"
+    "Korean",
+    "Mandarin"
   ];
 
   PreferencePage({
@@ -29,7 +23,7 @@ class PreferencePage extends StatefulWidget {
 
 class _PreferencePageState extends State<PreferencePage> {
   List<String> selectedGenres = [];
-  String selectedLanguage = "English";
+  String selectedLanguage = "";
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +55,7 @@ class _PreferencePageState extends State<PreferencePage> {
                     ),
                   ),
                   const Text(
-                    "Select Your Four \nFavorite Genres",
+                    "Select Your Four\nFavorite Genres",
                     style: TextStyle(fontSize: 20),
                   ),
                   const SizedBox(height: 16),
@@ -69,7 +63,45 @@ class _PreferencePageState extends State<PreferencePage> {
                     spacing: 24,
                     runSpacing: 24,
                     children: generatedGenreWidget(context),
-                  )
+                  ),
+                  const SizedBox(height: 24),
+                  const Text(
+                    "Movie Language\nYou Prefer",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  const SizedBox(height: 16),
+                  Wrap(
+                    spacing: 24,
+                    runSpacing: 24,
+                    children: generatedLanguageWidget(context),
+                  ),
+                  const SizedBox(height: 30),
+                  Center(
+                    child: FloatingActionButton(
+                      elevation: 0,
+                      backgroundColor: primaryColor,
+                      onPressed: () {
+                        if (selectedGenres.length != 4) {
+                          Flushbar(
+                            duration: const Duration(milliseconds: 1500),
+                            flushbarPosition: FlushbarPosition.TOP,
+                            backgroundColor: const Color(0xffff5c83),
+                            message: "Please select 4 genres",
+                          ).show(context);
+                        } else {
+                          widget.registrationData.selectedGenres =
+                              selectedGenres;
+                          widget.registrationData.language = selectedLanguage;
+
+                          context.read<PageBloc>().add(
+                              GoToAccountConfirmationPage(
+                                  widget.registrationData));
+                        }
+                      },
+                      child: const Icon(Icons.arrow_forward),
+                    ),
+                  ),
+                  const SizedBox(height: 20)
                 ],
               )
             ],
@@ -104,5 +136,24 @@ class _PreferencePageState extends State<PreferencePage> {
         });
       }
     }
+  }
+
+  List<Widget> generatedLanguageWidget(BuildContext context) {
+    double width =
+        ((MediaQuery.of(context).size.width / 2) - (2 * defaultMargin));
+
+    return widget.languages
+        .map((e) => SelectableBox(
+              e,
+              width: width,
+              height: 60,
+              isSelected: selectedLanguage == e,
+              onTap: () {
+                setState(() {
+                  selectedLanguage = e;
+                });
+              },
+            ))
+        .toList();
   }
 }

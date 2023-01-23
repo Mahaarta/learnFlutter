@@ -107,6 +107,7 @@ class _SignInPageState extends State<SignInPage> {
                         child: (isSigningIn)
                             ? const SpinKitFadingCircle(color: primaryColor)
                             : FloatingActionButton(
+                                elevation: 0,
                                 backgroundColor:
                                     (isEmailValid && isPasswordValid)
                                         ? primaryColor
