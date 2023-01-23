@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:learn_flutter/Extensions/email_validator.dart';
 import 'package:learn_flutter/Services/services.dart';
 import 'package:learn_flutter/Shared/shared.dart';
 import 'package:learn_flutter/UI/Pages/movie_page.dart';
+import 'package:learn_flutter/UI/Widgets/widgets.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 

@@ -30,14 +30,8 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         );
 
-    @override
-    // ignore: unused_element
-    void initState() {
-      super.initState();
-
-      nameController.text = widget.registrationData?.name ?? "";
-      emailController.text = widget.registrationData?.email ?? "";
-    }
+    nameController.text = widget.registrationData?.name ?? "123";
+    emailController.text = widget.registrationData?.email ?? "321";
 
     return WillPopScope(
       onWillPop: () {
@@ -186,44 +180,56 @@ class _SignUpPageState extends State<SignUpPage> {
                     const SizedBox(height: 30),
                     FloatingActionButton(
                       onPressed: () {
-                        if (!(nameController.text.trim() != "" &&
-                            emailController.text.trim() != "" &&
-                            passwordController.text.trim() != "" &&
-                            retypePasswordController.text.trim() != "")) {
-                          Flushbar(
-                            duration: const Duration(milliseconds: 1500),
-                            flushbarPosition: FlushbarPosition.TOP,
-                            backgroundColor: const Color(0xFFFF5c83),
-                            message: "Please fill all the fields",
-                          ).show(context);
-                        } else if (passwordController.text !=
-                            retypePasswordController.text) {
-                          Flushbar(
-                            duration: const Duration(milliseconds: 1500),
-                            flushbarPosition: FlushbarPosition.TOP,
-                            backgroundColor: const Color(0xffff5c83),
-                            message: "Mismatch password and retype password",
-                          ).show(context);
-                        } else if (passwordController.text.length < 6) {
-                          Flushbar(
-                            duration: const Duration(milliseconds: 1500),
-                            flushbarPosition: FlushbarPosition.TOP,
-                            backgroundColor: const Color(0xffff5c83),
-                            message:
-                                "Password should be more than 6 characters",
-                          ).show(context);
-                        } else if (emailController.text.isValidEmail()) {
-                          Flushbar(
-                            duration: const Duration(milliseconds: 1500),
-                            flushbarPosition: FlushbarPosition.TOP,
-                            backgroundColor: const Color(0xffff5c83),
-                            message: "Email address is not valid email",
-                          ).show(context);
-                        } else {
-                          widget.registrationData?.name = nameController.text;
-                          widget.registrationData?.email = emailController.text;
-                          widget.registrationData?.password = passwordController.text;
-                        }
+                        // if (!(nameController.text.trim() != "" &&
+                        //     emailController.text.trim() != "" &&
+                        //     passwordController.text.trim() != "" &&
+                        //     retypePasswordController.text.trim() != "")) {
+                        //   Flushbar(
+                        //     duration: const Duration(milliseconds: 1500),
+                        //     flushbarPosition: FlushbarPosition.TOP,
+                        //     backgroundColor: const Color(0xFFFF5c83),
+                        //     message: "Please fill all the fields",
+                        //   ).show(context);
+                        // } else if (passwordController.text !=
+                        //     retypePasswordController.text) {
+                        //   Flushbar(
+                        //     duration: const Duration(milliseconds: 1500),
+                        //     flushbarPosition: FlushbarPosition.TOP,
+                        //     backgroundColor: const Color(0xffff5c83),
+                        //     message: "Mismatch password and retype password",
+                        //   ).show(context);
+                        // } else if (passwordController.text.length < 6) {
+                        //   Flushbar(
+                        //     duration: const Duration(milliseconds: 1500),
+                        //     flushbarPosition: FlushbarPosition.TOP,
+                        //     backgroundColor: const Color(0xffff5c83),
+                        //     message:
+                        //         "Password should be more than 6 characters",
+                        //   ).show(context);
+                        // } else if (!emailController.text.isValidEmail()) {
+                        //   Flushbar(
+                        //     duration: const Duration(milliseconds: 1500),
+                        //     flushbarPosition: FlushbarPosition.TOP,
+                        //     backgroundColor: const Color(0xffff5c83),
+                        //     message: "Email address is not valid email",
+                        //   ).show(context);
+                        // } else {
+                        //   widget.registrationData?.name = nameController.text;
+                        //   widget.registrationData?.email = emailController.text;
+                        //   widget.registrationData?.password =
+                        //       passwordController.text;
+
+                        //   context.read<PageBloc>().add(
+                        //         GoToPreferencePage(
+                        //           widget.registrationData ?? RegistrationData(),
+                        //         ),
+                        //       );
+                        // }
+                        context.read<PageBloc>().add(
+                              GoToPreferencePage(
+                                widget.registrationData ?? RegistrationData(),
+                              ),
+                            );
                       },
                       elevation: 0,
                       backgroundColor: primaryColor,
