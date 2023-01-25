@@ -13,7 +13,6 @@ class UserInitial extends UserState {
 }
 
 class UserLoaded extends UserState {
-//   final Future<UserModel> user;
   final Future<UserModel> user;
   const UserLoaded(this.user);
 
