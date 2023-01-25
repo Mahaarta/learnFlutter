@@ -29,9 +29,9 @@ class MoviePage extends StatelessWidget {
                   uploadImage(imageFileToUpload!).then(
                     (downloadURL) {
                       imageFileToUpload = null;
-                      context
-                          .read<UserBloc>()
-                          .add(UpdateData(profileImage: downloadURL));
+                      context.read<UserBloc>().add(
+                            UpdateData(profileImage: downloadURL),
+                          );
                     },
                   );
                 }
