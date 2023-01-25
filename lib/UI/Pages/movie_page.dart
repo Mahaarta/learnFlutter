@@ -25,6 +25,17 @@ class MoviePage extends StatelessWidget {
           child: BlocBuilder<UserBloc, UserState>(
             builder: (context, userState) {
               if (userState is UserLoaded) {
+                if (imageFileToUpload != null) {
+                  uploadImage(imageFileToUpload!).then(
+                    (downloadURL) {
+                      imageFileToUpload = null;
+                      context.read<UserBloc>().add(
+                            UpdateData(profileImage: downloadURL),
+                          );
+                    },
+                  );
+                }
+
                 return Row(
                   children: [
                     Container(
@@ -49,13 +60,14 @@ class MoviePage extends StatelessWidget {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
-                                    image: (snapshot.data?.profilePicture == "")
-                                        ? const AssetImage(
-                                                "assets/user_pic.png")
-                                            as ImageProvider
-                                        : NetworkImage(
-                                            snapshot.data?.profilePicture ??
-                                                ""),
+                                    image:
+                                        (snapshot.data?.profilePicture == "1")
+                                            ? const AssetImage(
+                                                    "assets/user_pic.png")
+                                                as ImageProvider
+                                            : NetworkImage(
+                                                snapshot.data?.profilePicture ??
+                                                    ""),
                                     fit: BoxFit.cover),
                               ),
                             ),
@@ -97,10 +109,10 @@ class MoviePage extends StatelessWidget {
                               ),
                               Text(
                                 NumberFormat.currency(
-                                  locale: "id_ID",
-                                  decimalDigits: 0,
-                                  symbol: "IDR "
-                                ).format(snapshot.data?.balance ?? 0),
+                                        locale: "id_ID",
+                                        decimalDigits: 0,
+                                        symbol: "IDR ")
+                                    .format(snapshot.data?.balance ?? 0),
                                 style: yellowNumberFont.copyWith(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
