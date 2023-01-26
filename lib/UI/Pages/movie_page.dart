@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:learn_flutter/Bloc/Movie/bloc/movie_bloc.dart';
 import 'package:learn_flutter/Bloc/User/bloc/user_bloc.dart';
 import 'package:learn_flutter/Shared/shared.dart';
+import 'package:learn_flutter/UI/Widgets/widgets.dart';
 
 import '../../Models/models.dart';
 
@@ -153,7 +154,7 @@ class MoviePage extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 140,
+          height: 150,
           child: BlocBuilder<MovieBloc, MovieState>(
             builder: (context, movieState) {
               if (movieState is MovieLoaded) {
@@ -163,10 +164,11 @@ class MoviePage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: movies.length,
                   itemBuilder: (context, index) => Container(
-                    margin: const EdgeInsets.all(5),
-                    child: Text(
-                      movies[index].title,
+                    margin: EdgeInsets.only(
+                      left: (index == 0) ? defaultMargin : 0,
+                      right: (index == movies.length - 1) ? defaultMargin : 16,
                     ),
+                    child: MovieCard(movies[index]),
                   ),
                 );
               } else {
