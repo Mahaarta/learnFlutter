@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
+import 'package:learn_flutter/Bloc/Movie/bloc/movie_bloc.dart';
 import 'package:learn_flutter/Bloc/User/bloc/user_bloc.dart';
 import 'package:learn_flutter/Shared/shared.dart';
+
+import '../../Models/models.dart';
 
 class MoviePage extends StatelessWidget {
   const MoviePage({super.key});
@@ -11,7 +14,7 @@ class MoviePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: [
+      children: <Widget>[
         Container(
           decoration: const BoxDecoration(
             color: accentColor1,
@@ -37,7 +40,7 @@ class MoviePage extends StatelessWidget {
                 }
 
                 return Row(
-                  children: [
+                  children: <Widget>[
                     Container(
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
@@ -47,7 +50,7 @@ class MoviePage extends StatelessWidget {
                         ),
                       ),
                       child: Stack(
-                        children: [
+                        children: <Widget>[
                           const SpinKitFadingCircle(
                             size: 50,
                             color: accentColor2,
@@ -83,7 +86,7 @@ class MoviePage extends StatelessWidget {
                           builder: (context, snapshot) => Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                            children: <Widget>[
                               SizedBox(
                                 /*
                                 note: 
@@ -129,6 +132,47 @@ class MoviePage extends StatelessWidget {
                 return const SpinKitFadingCircle(
                   color: accentColor2,
                   size: 50,
+                );
+              }
+            },
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(
+            defaultMargin,
+            30,
+            defaultMargin,
+            12,
+          ),
+          child: Text(
+            "Now Playing",
+            style: blackTextFont.copyWith(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 140,
+          child: BlocBuilder<MovieBloc, MovieState>(
+            builder: (context, movieState) {
+              if (movieState is MovieLoaded) {
+                List<Movie> movies = movieState.movies.sublist(0, 10);
+
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: movies.length,
+                  itemBuilder: (context, index) => Container(
+                    margin: const EdgeInsets.all(5),
+                    child: Text(
+                      movies[index].title,
+                    ),
+                  ),
+                );
+              } else {
+                return const SpinKitFadingCircle(
+                  color: primaryColor,
+                  size: 45,
                 );
               }
             },
