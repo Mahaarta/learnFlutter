@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:learn_flutter/Bloc/Movie/bloc/movie_bloc.dart';
 import 'package:learn_flutter/Bloc/bloc/blocs.dart';
 import 'package:learn_flutter/Services/services.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,9 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider<PageBloc>(create: (context) => PageBloc()),
           BlocProvider<UserBloc>(create: (context) => UserBloc()),
-          BlocProvider<ThemeBloc>(create: (context) => ThemeBloc())
+          BlocProvider<ThemeBloc>(create: (context) => ThemeBloc()),
+          BlocProvider<MovieBloc>(
+              create: (context) => MovieBloc()..add(FetchMovie()))
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, themeState) => MaterialApp(
