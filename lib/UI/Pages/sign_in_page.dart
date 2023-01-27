@@ -20,6 +20,7 @@ class _SignInPageState extends State<SignInPage> {
     context.read<ThemeBloc>().add(
           ChangeTheme(
             ThemeData().copyWith(
+              appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.light),
               inputDecorationTheme: InputDecorationTheme(
                 floatingLabelStyle: const TextStyle(color: accentColor2),
                 focusedBorder: OutlineInputBorder(

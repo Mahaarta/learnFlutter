@@ -102,6 +102,7 @@ class MoviePage extends StatelessWidget {
                               */
 
                                 width: (MediaQuery.of(context).size.width -
+                                    (MediaQuery.of(context).padding.bottom) -
                                     (2 * defaultMargin) -
                                     50 -
                                     12 -

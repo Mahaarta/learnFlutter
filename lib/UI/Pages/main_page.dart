@@ -13,57 +13,66 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Container(
-            color: accentColor1,
-          ),
-          SafeArea(
-            bottom: false,
-            child: Container(
-              color: const Color(0xfff6f7f9),
-            ),
-          ),
-          PageView(
-            controller: pageController,
-            onPageChanged: (index) {
-              setState(() {
-                bottomNavbarIndex = index;
-              });
-            },
-            children: const [
-              MoviePage(),
-              Center(child: Text("My Ticket")),
-            ],
-          ),
-          createCustomBottomNavigation(),
-          Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 46,
-                width: 46,
-                margin: const EdgeInsets.only(
-                    bottom: 42 + 16), // 16 adalah margin dari safe area
-                child: FloatingActionButton(
-                  elevation: 0,
-                  backgroundColor: accentColor2,
-                  onPressed: () {
-                    context.read<UserBloc>().add(SignOut());
-                    AuthServices.signOuts();
-                  },
-                  child: SizedBox(
-                    width: 30,
-                    height: 30,
-                    child: Icon(
-                      MdiIcons.walletPlus,
-                      color: Colors.black.withOpacity(0.54),
+      body: Container(
+        color: accentColor1, // Status bar color
+        child: SafeArea(
+          left: false,
+          right: false,
+          bottom: false,
+          child: Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              Container(color: accentColor1),
+              SafeArea(
+                bottom: false,
+                child: Container(
+                  color: const Color(0xfff6f7f9),
+                ),
+              ),
+              PageView(
+                controller: pageController,
+                onPageChanged: (index) {
+                  setState(() {
+                    bottomNavbarIndex = index;
+                  });
+                },
+                children: const [
+                  MoviePage(),
+                  Center(child: Text("My Ticket")),
+                ],
+              ),
+              createCustomBottomNavigation(),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  height: 46,
+                  width: 46,
+                  margin: const EdgeInsets.only(
+                      bottom: 42 + 16), // 16 adalah margin dari safe area
+                  child: FloatingActionButton(
+                    elevation: 0,
+                    backgroundColor: accentColor2,
+                    onPressed: () {
+                      context.read<UserBloc>().add(SignOut());
+                      AuthServices.signOuts();
+                    },
+                    child: SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: Icon(
+                        MdiIcons.walletPlus,
+                        color: Colors.black.withOpacity(0.54),
+                      ),
                     ),
                   ),
                 ),
-              ))
-        ],
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
