@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:learn_flutter/Extensions/extensions.dart';
 import 'package:learn_flutter/Models/models.dart';
 import 'package:learn_flutter/Services/services.dart';
 
@@ -26,11 +25,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           Future<UserModel> updateUser = (state as UserLoaded).user.then(
                 (value) async => value.copyWith(
                   name: event.name,
+                  balance: event.balance,
                   profilePicture: event.profileImage,
                 ),
               );
-
-          //await UserServices.updateUser(updateUser);
 
           updateUser.then((UserModel usm) {
             UserServices.updateUser(usm);

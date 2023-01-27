@@ -4,7 +4,7 @@ class UserModel extends Equatable {
   final String id;
   final String? email;
   final String? name;
-  final List<String>? selectedGenres;
+  final List<String> selectedGenres;
   final String? selectedLanguage;
   final String? profilePicture;
   final int? balance;
@@ -13,10 +13,10 @@ class UserModel extends Equatable {
     this.id, {
     this.email,
     this.name,
-    this.profilePicture = "",
-    this.balance = 50000,
-    this.selectedGenres,
+    this.selectedGenres = const [],
     this.selectedLanguage,
+    this.profilePicture = "[]",
+    this.balance = 50500,
   });
 
   UserModel copyWith({
@@ -28,15 +28,15 @@ class UserModel extends Equatable {
         id,
         email: email,
         name: name ?? this.name,
-        profilePicture: profilePicture,
-        balance: balance ?? this.balance,
         selectedGenres: selectedGenres,
         selectedLanguage: selectedLanguage,
+        profilePicture: profilePicture,
+        balance: balance ?? this.balance,
       );
 
   @override
   String toString() {
-    return "[$id] - [$name] - [$email]";
+    return "[$id] - [$name] - [$email] - [[$selectedGenres]]";
   }
 
   @override

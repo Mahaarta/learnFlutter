@@ -22,9 +22,10 @@ class SignOut extends UserEvent {
 
 class UpdateData extends UserEvent {
   final String? name;
+  final int? balance;
   final String? profileImage;
 
-  const UpdateData({this.name, this.profileImage});
+  const UpdateData({this.name, this.balance, this.profileImage});
 
   @override
   List<Object> get props => [name ?? "", profileImage ?? ""];
