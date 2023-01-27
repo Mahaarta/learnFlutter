@@ -11,8 +11,6 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
     on<MovieEvent>((event, emit) async {
       if (event is FetchMovie) {
         List<Movie> movies = await MovieServices.getMovie(1);
-        
-        print("data pelem $movies");
         emit(MovieLoaded(movies: movies));
       }
     });

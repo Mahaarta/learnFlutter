@@ -33,9 +33,9 @@ class MoviePage extends StatelessWidget {
                   uploadImage(imageFileToUpload!).then(
                     (downloadURL) {
                       imageFileToUpload = null;
-                      context.read<UserBloc>().add(
-                            UpdateData(profileImage: downloadURL),
-                          );
+                      context
+                          .read<UserBloc>()
+                          .add(UpdateData(profileImage: downloadURL));
                     },
                   );
                 }
@@ -179,6 +179,48 @@ class MoviePage extends StatelessWidget {
               }
             },
           ),
+        ),
+        Container(
+          margin: const EdgeInsets.fromLTRB(
+            defaultMargin,
+            30,
+            defaultMargin,
+            12,
+          ),
+          child: Text(
+            "Browse Movie",
+            style: blackTextFont.copyWith(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        BlocBuilder<UserBloc, UserState>(
+          builder: (context, userState) {
+            if (userState is UserLoaded) {
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: defaultMargin),
+                child: FutureBuilder(
+                  future: userState.user,
+                  builder: (context, snapshot) => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: List.generate(
+                      snapshot.data?.selectedGenres.length ?? 0,
+                      (index) {
+                        return BrowseButton(
+                            snapshot.data?.selectedGenres[index] ?? "");
+                      },
+                    ),
+                  ),
+                ),
+              );
+            } else {
+              return const SpinKitFadingCircle(
+                size: 50,
+                color: primaryColor,
+              );
+            }
+          },
         )
       ],
     );

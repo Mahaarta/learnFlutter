@@ -18,11 +18,14 @@ class UserServices {
   static Future<UserModel> getUser(String id) async {
     DocumentSnapshot snapshot = await _userCollection.doc(id).get();
 
-    return UserModel(id,
-        email: snapshot.get("email"),
-        name: snapshot.get("name"),
-        balance: snapshot.get("balance"),
-        selectedLanguage: snapshot.get("selectedLanguage"),
-        profilePicture: snapshot.get("profilePicture"));
+    return UserModel(
+      id,
+      email: snapshot.get("email"),
+      name: snapshot.get("name"),
+      balance: snapshot.get("balance"),
+      selectedGenres: List<String>.from(snapshot.get("selectedGenres")),
+      selectedLanguage: snapshot.get("selectedLanguage"),
+      profilePicture: snapshot.get("profilePicture"),
+    );
   }
 }

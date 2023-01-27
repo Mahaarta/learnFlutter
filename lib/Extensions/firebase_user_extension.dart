@@ -4,7 +4,7 @@ extension FirebaseUserExtension on UserCredential {
   UserModel convertToUserModel({
     String name = "anon",
     String email = "",
-    List<String> selectedGenres = const [],
+    List<String>? selectedGenres,
     String selectedLanguage = "en",
     int balance = 50000,
   }) =>
@@ -12,7 +12,7 @@ extension FirebaseUserExtension on UserCredential {
         user!.uid,
         email: email,
         name: name,
-        selectedGenres: selectedGenres,
+        selectedGenres: selectedGenres ?? ["-"],
         selectedLanguage: selectedLanguage,
       );
 

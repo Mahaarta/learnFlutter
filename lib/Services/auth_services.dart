@@ -9,11 +9,8 @@ class AuthServices {
     String selectedLanguage,
   ) async {
     try {
-      auth.UserCredential result =
-          await auth.FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      auth.UserCredential result = await auth.FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
 
       UserModel userModel = result.convertToUserModel(
         name: name,
@@ -21,7 +18,6 @@ class AuthServices {
         selectedGenres: selectedGenres,
         selectedLanguage: selectedLanguage,
       );
-
 
       await UserServices.updateUser(userModel);
       return SignInSignUpResult(user: userModel);
@@ -31,13 +27,13 @@ class AuthServices {
   }
 
   static Future<SignInSignUpResult?> signIn(
-      String email, String password) async {
+    String email,
+    String password,
+  ) async {
     try {
-      auth.UserCredential result =
-          await auth.FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      auth.UserCredential result = await auth.FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+
       UserModel user = await result.fromFireStores();
 
       return SignInSignUpResult(user: user);

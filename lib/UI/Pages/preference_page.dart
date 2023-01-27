@@ -89,8 +89,7 @@ class _PreferencePageState extends State<PreferencePage> {
                             message: "Please select 4 genres",
                           ).show(context);
                         } else {
-                          widget.registrationData.selectedGenres =
-                              selectedGenres;
+                          widget.registrationData.selectedGenres = selectedGenres;
                           widget.registrationData.language = selectedLanguage;
 
                           context.read<PageBloc>().add(
