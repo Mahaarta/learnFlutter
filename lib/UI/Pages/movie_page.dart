@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -221,7 +223,46 @@ class MoviePage extends StatelessWidget {
               );
             }
           },
-        )
+        ),
+        Container(
+          margin:
+              const EdgeInsets.fromLTRB(defaultMargin, 30, defaultMargin, 12),
+          child: Text(
+            "Coming Soon",
+            style: blackTextFont.copyWith(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 160,
+          child: BlocBuilder<MovieBloc, MovieState>(
+            builder: (_, movieState) {
+              if (movieState is MovieLoaded) {
+                List<Movie> movies = movieState.movies.sublist(10);
+
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: movies.length,
+                  itemBuilder: (context, index) => Container(
+                    margin: EdgeInsets.only(
+                      left: (index == 0) ? defaultMargin : 0,
+                      right: (index == movies.length - 1) ? defaultMargin : 16,
+                    ),
+                    child: ComingSoonCard(movies[index]),
+                  ),
+                );
+              } else {
+                return const SpinKitFadingCircle(
+                  size: 45,
+                  color: primaryColor,
+                );
+              }
+            },
+          ),
+        ),
+        const SizedBox(height: 200)
       ],
     );
   }
