@@ -282,7 +282,7 @@ class MoviePage extends StatelessWidget {
                   child: PromoCard(promo: e)))
               .toList(),
         ),
-        const SizedBox(height: 200)
+        const SizedBox(height: 100)
       ],
     );
   }
